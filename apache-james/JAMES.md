@@ -109,3 +109,6 @@ Now the Server should run without any error.
 
 ## Web Administration
 
+The web administration supports the CRUD operations on the domains, the users, their mailboxes and their quotas, managing mail repositories, and much more, as described in the [web administration page](https://james.apache.org/server/manage-webadmin.html).
+
+

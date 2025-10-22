@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>README Viewer</title>
+    <title>Apache James Setup</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,14 +23,14 @@
     </style>
 </head>
 <body>
-    <div id="content">Loading README...</div>
+    <div id="content">Loading page...</div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         fetch('JAMES.md')
             .then(response => response.text())
             .then(text => {
-                document.getElementById('content').innerHTML = marked.parse(text); // convert Markdown to HTML
+                document.getElementById('content').innerHTML = marked.parse(text); // here it converts Markdown to HTML
             })
             .catch(err => {
                 document.getElementById('content').innerText = "Failed to load JAMES.md";
