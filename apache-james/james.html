@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+            background-color: rgb(219, 200, 200);
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        code {
+            background: #eee;
+            padding: 2px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">Loading README...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        fetch('JAMES.md')
+            .then(response => response.text())
+            .then(text => {
+                document.getElementById('content').innerHTML = marked.parse(text); // convert Markdown to HTML
+            })
+            .catch(err => {
+                document.getElementById('content').innerText = "Failed to load JAMES.md";
+                console.error(err);
+            });
+    </script>
+</body>
+</html>
