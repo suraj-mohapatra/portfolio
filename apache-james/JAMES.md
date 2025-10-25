@@ -109,6 +109,79 @@ Now the Server should run without any error.
 
 ## Web Administration
 
-The web administration supports the CRUD operations on the domains, the users, their mailboxes and their quotas, managing mail repositories, and much more, as described in the [web administration page](https://james.apache.org/server/manage-webadmin.html).
+The web administration supports the CRUD operations on the domains, the users, their mailboxes and their quotas, managing mail repositories, and much more, as described in the [web administration page](https://james.apache.org/server/manage-webadmin.html). A few have been described below.
 
+- create a domain of your choice. Here I chose **uglyeagle.bird**   
+  ```
+  curl -X PUT http://localhost:8000/domains/uglyeagle.bird
+  ```
 
+- check whether your domain has been created
+  ```
+  curl -X GET http://localhost:8000/domains
+  ```
+
+- create atleast 2 email accounts under this domain (for alice and bob)
+
+  ```
+  curl -X PUT "http://localhost:8000/users/alice@uglyeagle.bird" ^
+      -H "Content-Type: application/json" ^
+      -d "{\"password\": \"alice123\"}"
+  ```
+  ```
+  curl -X PUT "http://localhost:8000/users/bob@uglyeagle.bird" ^
+      -H "Content-Type: application/json" ^
+      -d "{\"password\": \"bob123\"}"
+  ```
+
+- check whether accounts are created 
+
+  ```
+  curl -X GET "http://localhost:8000/users"
+  ```
+
+## Mail Client Setup
+Now that the domain and email addresses are set up, it's time to configure a mail client such as Microsoft Outlook (Office 365), Mozilla Thunderbird.
+
+or you can write a python program as well
+
+```
+import smtplib
+import ssl
+from email.message import EmailMessage
+
+SMTP_SERVER = "localhost"
+SMTP_PORT = 587
+SENDER_EMAIL = "alice@uglyeagle.bird"
+SENDER_PASSWORD = "alice123"
+RECEIVER_EMAIL = "bob@uglyeagle.bird"
+
+msg = EmailMessage()
+msg['Subject'] = "Testing from Python!"
+msg['From'] = SENDER_EMAIL
+msg['To'] = RECEIVER_EMAIL
+msg.set_content("Hello Bob,\n\nThis is a test email sent from a Python script.\n\n- Alice")
+
+print(f"Connecting to server at {SMTP_SERVER}:{SMTP_PORT}...")
+
+context = ssl.create_default_context()
+context.check_hostname = False
+context.verify_mode = ssl.CERT_NONE
+
+try:
+    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+        server.ehlo()
+        print("Starting STARTTLS...")
+        server.starttls(context=context)
+        server.ehlo()
+        print(f"Logging in as {SENDER_EMAIL}...")
+        server.login(SENDER_EMAIL, SENDER_PASSWORD)
+        print("Sending email...")
+        server.send_message(msg)
+        print("\nSuccess! Email sent from Alice to Bob.")
+except Exception as e:
+    print(f"\nError: Failed to send email.")
+    print(f"DETAILS: {e}")
+```
+
+tutorials coming for Outlook and Thunderbird...
