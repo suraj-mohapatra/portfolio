@@ -1,0 +1,103 @@
+:root {
+    --bg: #0b0f0c;
+    --panel: #07100b;
+    --text: #c8f7d4;
+    --muted: #5e6b5b;
+    --accent: #39ff14;
+    --accent-2: #66e0ff;
+    --radius: 8px;
+    font-size: 16px;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background: #000;
+    font-family: monospace;
+    color: var(--text);
+}
+
+.terminal {
+    max-width: 900px;
+    margin: 40px auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 0 15px #39ff14;
+}
+
+.header {
+    background: #111;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red {
+    background: #ff5f56;
+}
+
+.dot.yellow {
+    background: #ffbd2e;
+}
+
+.dot.green {
+    background: #27c93f;
+}
+
+.screen {
+    background: #000;
+    padding: 20px;
+    min-height: 500px;
+    overflow-y: auto;
+}
+
+.line {
+    white-space: pre-wrap;
+    margin-bottom: 6px;
+}
+
+.prompt {
+    color: var(--accent);
+}
+
+.input {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    outline: none;
+    width: 100%;
+    caret-color: var(--accent);
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: var(--text);
+    margin-left: 3px;
+    animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: url('../assets/uglyeagle.jpg') center/cover; /* Updated URL */
+    margin-bottom: 10px;
+}

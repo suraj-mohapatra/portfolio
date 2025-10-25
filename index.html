@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Basic Webpage</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Suraj — Java Developer Portfolio</title>
+    <link rel="stylesheet" href="skin/index-style.css">
 </head>
+
 <body>
-    <h1>Welcome to My Basic Webpage</h1>
-    <p>This is a simple paragraph on my first HTML page.</p>
-    <p>You can add more content here, like images, links, and lists.</p>
+    <div class="terminal">
+
+        <div class="header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+        </div>
+
+        <div class="screen" id="screen">
+            <div class="line">Welcome to <span class="prompt">suraj@portfolio</span></div>
+            <div class="line">Type <span class="prompt">help</span> to see available commands.</div>
+            <div class="line">&nbsp;</div>
+            <div id="output"></div>
+            <div class="line"><span class="prompt">$</span> <input id="input" class="input" autofocus></div>
+        </div>
+        
+    </div>
+    <script src="brain/terminal.js"></script>
 </body>
+
 </html>
