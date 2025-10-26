@@ -4,12 +4,23 @@ let history = [];
 let historyIndex = 0;
 
 const commands = {
+
     help: `Available commands:\n about  - Show profile info\n skills - Show my skills\n projects - Show featured projects\n contact - Contact details\n clear - Clear the terminal`,
-    about: `<div class='profile-pic'></div>I'm Suraj, a passionate <span class='prompt'>Java Developer</span> who loves building scalable backend systems, RESTful APIs, and performance-optimized applications.\nI enjoy working with modern frameworks like Spring Boot and exploring new technologies in distributed systems.`,
-    skills: `Core Java, Spring Boot, Hibernate, REST APIs, Maven, Git, MySQL, JUnit, Docker, Linux, and Microservices Architecture.`,
+    
+    about: () => {
+        return `<div class='profile-pic'></div>I am Suraj, a passionate <span class='prompt'>Software Developer</span> who loves building scalable backend systems, and performance-optimized applications.\nI enjoy working with modern frameworks like Spring Boot and exploring new technologies in distributed systems.`;
+    },
+    
+    skills: `Java SE, Java EE/ JakartaEE, Spring Boot, Hibernate, REST APIs, Maven, Git, MySQL, JUnit, Docker, Linux, and Microservices Architecture.`,
+    
     projects: `1. Banking Web Application — Built with JSP, Servlets, and Oracle DB.\n2. Reactive Chat App — Real-time messaging using WebSockets and Netty.\n3. Microservices Demo — Spring Cloud-based service communication project.`,
-    contact: `Email: suraj@example.com\nGitHub: https://github.com/yourusername\nLinkedIn: https://linkedin.com/in/yourprofile`,
+
+    contact: () => {
+        return `GitHub: <a href="https://github.com/suraj-mohapatra" target="_blank" rel="noopener noreferrer">https://github.com/suraj-mohapatra</a><br>LinkedIn: <a href="https://linkedin.com/in/surajmohapatra" target="_blank" rel="noopener noreferrer">https://linkedin.com/in/surajmohapatra</a>`;
+    },
+
     clear: ''
+    
 };
 
 input.addEventListener('keydown', (e) => {
@@ -18,8 +29,12 @@ input.addEventListener('keydown', (e) => {
         if (!cmd) return;
         appendLine(`<span class='prompt'>$</span> ${cmd}`);
         if (commands[cmd] !== undefined) {
-            if (cmd === 'clear') { output.innerHTML = ''; }
-            else appendLine(commands[cmd]);
+            if (cmd === 'clear') { 
+                output.innerHTML = ''; 
+            } else {
+                const content = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
+                appendLine(content);
+            }
         } else {
             appendLine(`bash: ${cmd}: command not found`);
         }
@@ -48,3 +63,33 @@ function scrollBottom() {
     const screen = document.getElementById('screen');
     screen.scrollTop = screen.scrollHeight;
 }
+
+// Binary scroll effect
+function createBinaryScroll() {
+    const binaryScroll = document.querySelector('.binary-scroll');
+    const binaryContent = document.createElement('div');
+    binaryContent.style.whiteSpace = 'nowrap';
+    binaryContent.style.color = 'var(--accent)';
+    binaryContent.style.position = 'absolute';
+    binaryContent.style.animation = 'scroll 40s linear infinite';
+    
+    function generateBinary() {
+        let binary = '';
+        for (let i = 0; i < 200; i++) {
+            binary += Math.random() < 0.5 ? '0' : '1';
+            binary += ' ';
+        }
+        return binary;
+    }
+
+    function updateBinary() {
+        binaryContent.textContent = generateBinary();
+    }
+
+    binaryScroll.appendChild(binaryContent);
+    updateBinary();
+    setInterval(updateBinary, 500); // Update binary every 500ms
+}
+
+// Initialize binary scroll
+createBinaryScroll();
