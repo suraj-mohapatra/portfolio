@@ -143,7 +143,7 @@ The web administration supports the CRUD operations on the domains, the users, t
 ## Mail Client Setup
 Now that the domain and email addresses are set up, it's time to configure a mail client such as Microsoft Outlook (Office 365), Mozilla Thunderbird.
 
-or you can write a python program as well
+or, you can write a python program as well
 
 ```
 import smtplib
@@ -183,5 +183,7 @@ except Exception as e:
     print(f"\nError: Failed to send email.")
     print(f"DETAILS: {e}")
 ```
+
+or, you can follow [james-client](https://github.com/suraj-mohapatra/james-client) project.
 
 tutorials coming for Outlook and Thunderbird...
